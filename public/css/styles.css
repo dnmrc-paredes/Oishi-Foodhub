@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Ubuntu:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+:root {
+    --Logo: 'Ubuntu', sans-serif;
+    --small: 'Montserrat', sans-serif;
+    --read: 'Lato', sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+     
+}
+
+/* navbar */
+
+.navmain {
+    display: flex;
+    background-color: rgb(0, 0, 0);
+}
+
+.navlogo {
+    flex: 1;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-family: var(--Logo);
+}
+
+
+
+.navlinks {
+    flex: 2;
+    margin: auto;
+}
+
+.navlinks ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navlinks ul li {
+    list-style: none;
+}
+
+.navlinks ul li a {
+    text-decoration: none;
+    font-family: var(--small);
+    color: white;
+}
+
+/* footer EJS */
+
+.footer {
+    display: flex;
+    justify-content: center;
+    font-family: var(--read);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* login EJS */
+
+.login h1 {
+    font-family: var(--Logo);
+    text-align: center;
+}
+
+.loginbox {
+    display: flex;
+}
+
+.logindesign {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 10rem 0rem;
+    background-image: url(https://i.pinimg.com/originals/d3/6d/46/d36d462db827833805497d9ea78a1343.jpg);
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.logindesign h1 {
+    font-weight: bold;
+    font-size: 3rem;
+    margin: auto;
+    color: black;
+    opacity: 0.8;
+}
+
+.loginform {
+    padding: 2rem 4rem;
+    flex: 1;    
+    margin: auto;
+}
+
+.formers {
+    display: flex;
+    justify-content: center;
+    padding: 0rem 1rem;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(248, 248, 248);
+    border-radius: 10px;
+    padding: 5rem 4rem;
+    box-shadow: 0 8px 6px -6px black;
+    
+}
+
+.login p {
+    margin-top: 0.5rem;
+    font-family: var(--small);
+    font-size: 0.8rem;
+}
+
+input {
+    padding: 0.5rem;
+    margin: 0.4rem 0rem;
+    border-radius: 5px;
+    border: none;
+    font-family: var(--small);
+    background-color: gainsboro;
+    color: black;
+}
+
+.loginbtn {
+    padding: 0.5rem 1rem; 
+    background-color: aquamarine;
+    border: none;
+    outline: none;  
+    font-family: var(--small);
+    margin-top: 1rem;
+}
+
+/* register EJS */
+
+.registerbox {
+    display: flex;
+    justify-content: center;
+    padding: 5rem 10rem;
+}
+
+.regform {
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 6rem;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.regform h1 {
+    font-family: var(--small);
+    font-weight: normal;
+}
+
+.signupbtn {
+    padding: 0.5rem 1rem; 
+    background-color: aquamarine;
+    border: none;
+    outline: none;  
+    font-family: var(--small);
+    margin-top: 1rem;
+}
+
+/* password and email EJS */
+
+.box, .box2 {
+    padding: 15rem 5rem;
+    text-align: center;
+    font-family: var(--small);
+}
+
+.tryagain {
+    padding: 0.5rem 1rem; 
+    background-color: aquamarine;
+    border: none;
+    outline: none;  
+    font-family: var(--small);
+    margin-top: 1rem;
+    border-radius: 5px;
+}
+
+.tryagain a {
+    text-decoration: none;
+}

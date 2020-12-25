@@ -1,0 +1,37 @@
+<%- include(`header`) %>
+
+<div class="loginbox">
+    <div class="logindesign">
+        <h1> Quality food, <br>
+        Tastely uniquely. </h1>
+    </div>
+
+    <div class="loginform">
+        <div class="formers">
+            <form action="/" method="post" class="login">
+
+                <h1> Login </h1>
+
+                <!-- <input type="email" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password"> -->
+
+                <div class="form-floating">
+                    <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email">
+                    <label for="floatingInput">Email address</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                  </div>
+
+                <button type="submit" class="loginbtn"> Login </button>
+
+                <p> No account yet? <a href="/signup"> Sign up now.</a></p> 
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<%- include(`footer`) %>
