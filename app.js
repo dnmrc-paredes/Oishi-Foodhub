@@ -22,10 +22,17 @@ mongoose.connect(`mongodb+srv://TmAdmin:${process.env.PASSWORD}@cluster0.c7khy.m
 const registerSchema = new mongoose.Schema({
     email: String,
     password: String,
-    passwordConfirmation: String
+    passwordConfirmation: String,
+    isAdmin: Boolean
+})
+
+const productsSchema = new mongoose.Schema({
+    name: String,
+    price: Number
 })
 
 const user = new mongoose.model(`user`, registerSchema)
+const product = new mongoose.model(`product`, productsSchema)
 
 app.get(`/`, (req, res) => {
 
@@ -43,6 +50,14 @@ app.post(`/`, (req, res) => {
 
     const { email, password } = req.body
 
+    if (email === "" && password === "") {
+        res.render(`tryagain`)
+    } else if (email && password === "") {
+        res.render(`password`)
+    } else if (email === "" && password) {
+        res.render(`email`)
+    }
+
     user.findOne({email, password}, (err, foundAcc) => {
 
         if (err) {
@@ -50,9 +65,11 @@ app.post(`/`, (req, res) => {
         } else if (foundAcc) {
             if (foundAcc.email !== email || foundAcc.password !== password) {
                 res.send(`Mali`)
+            }  else if (foundAcc.email === email && foundAcc.password === password && foundAcc.isAdmin === true) {
+                const kuki = req.session.ID = foundAcc._id
+                res.render(`home`)
             } else if (foundAcc.email === email && foundAcc.password === password) {
                 const kuki = req.session.ID = foundAcc._id
-                console.log(kuki)
                 res.render(`home`)
             }
         }
@@ -60,6 +77,8 @@ app.post(`/`, (req, res) => {
     })
 
 })
+
+
 
 app.get(`/signup`, (req, res) => {
     res.render(`register`)
@@ -115,6 +134,7 @@ app.post(`/signup`, (req, res) => {
 app.get(`/home`, (req, res) => {
 
     const kuki = req.session.ID
+    console.log(kuki)
 
     if (!kuki) {
         res.render(`login`)
@@ -124,11 +144,32 @@ app.get(`/home`, (req, res) => {
 
 })
 
+app.get(`/contact`, (req, res) => {
+    res.render(`contact`)
+})
+
+app.get(`/adminpanel`, (req, res) => {
+
+    const kuki = req.session.ID
+    console.log(kuki)
+
+    user.findOne({_id: kuki}, (err, foundAcc) => {
+        if (err) {
+            console.log(err)
+        } else if (foundAcc) {
+            if (foundAcc.isAdmin === true) {
+                res.render(`admin`)
+            } else {
+                res.render(`notadmin`)
+            }
+        }
+    })
+
+})
+
 app.get(`/logout`, (req, res) => {
 
-    console.log(req.session.ID)
     req.session = null
-    console.log(req.session)
 
     res.redirect(`/`)
 

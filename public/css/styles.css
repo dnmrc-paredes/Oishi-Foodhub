@@ -23,14 +23,11 @@ body {
 
 .navlogo {
     flex: 1;
-    margin: auto;
     display: flex;
     justify-content: center;
     color: white;
     font-family: var(--Logo);
 }
-
-
 
 .navlinks {
     flex: 2;
@@ -39,11 +36,13 @@ body {
 
 .navlinks ul {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
+    margin: auto 2rem;
 }
 
 .navlinks ul li {
     list-style: none;
+    margin: 0rem 3rem;
 }
 
 .navlinks ul li a {
@@ -58,7 +57,10 @@ body {
     display: flex;
     justify-content: center;
     font-family: var(--read);
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: black;
+    color: white;
+    padding: 0.5rem 0rem;
+    margin: auto;
 }
 
 /* login EJS */
@@ -169,7 +171,7 @@ input {
 
 /* password and email EJS */
 
-.box, .box2 {
+.box, .box2, .box3 {
     padding: 15rem 5rem;
     text-align: center;
     font-family: var(--small);
@@ -187,4 +189,61 @@ input {
 
 .tryagain a {
     text-decoration: none;
+}
+
+/* home EJS */
+
+.products {
+    text-align: center;
+    font-family: var(--Logo);
+    margin-top: 3rem;
+}
+
+.prodbox {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 5rem 2rem;
+}
+
+.prodbox .item1 {
+    background-color: rgb(247, 247, 247);
+    border-radius: 10px;
+}
+
+.prodbox .item1 p {
+    font-family: var(--read);
+}
+
+.prodbox .item1 img {
+    width: 80%;
+}
+
+.logoutbtn a {
+    text-decoration: none;
+}
+
+.logoutbtn {
+    padding: 0.5rem 1rem; 
+    background-color: aquamarine;
+    border: none;
+    outline: none;  
+    font-family: var(--small);
+    margin-top: 1rem;
+}
+
+/* contact EJS */
+
+.contactbox {
+    padding: 12rem 5rem;
+}
+
+.contactbox h2 {
+    font-family: var(--Logo);
+    margin-bottom: 2rem;
+    font-size: 3rem;
+}
+
+.contactbox p {
+    font-family: var(--read);
 }
