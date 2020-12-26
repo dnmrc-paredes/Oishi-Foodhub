@@ -22,7 +22,6 @@ mongoose.connect(`mongodb+srv://TmAdmin:${process.env.PASSWORD}@cluster0.c7khy.m
 const registerSchema = new mongoose.Schema({
     email: String,
     password: String,
-    passwordConfirmation: String,
     isAdmin: Boolean
 })
 
@@ -86,46 +85,37 @@ app.get(`/signup`, (req, res) => {
 
 app.post(`/signup`, (req, res) => {
 
-    const { email, password, passwordConfirmation } = req.body
+    const { email, password} = req.body
 
     const person = new user ({
         email,
-        password,
-        passwordConfirmation
+        password
     })
 
     
 
-    user.findOne({email, password, passwordConfirmation}, (err, existAcc) => {
+    user.findOne({email, password}, (err, existAcc) => {
+
         if (err) {
             console.log(err)
-        } if (!email && !password && !passwordConfirmation) {
-            res.send(`Please fill in all inputs`)
-        } else if (email && !password && !passwordConfirmation) {
-            res.render(`password`)
-        } else if (email && password & !passwordConfirmation) {
-            res.render(`password`)
-        } else if (email && !password & passwordConfirmation) {
-            res.render(`password`)
-        } else if (!email && password && !passwordConfirmation) {
-            res.render(`password`)
-        } else if (!email && password & passwordConfirmation) {
-            res.render(`email`)
-        } else if (!email && !password && passwordConfirmation) {
-            res.send(`Email and Password is required`)
-        } else if (password !== passwordConfirmation ) {
-            res.send(`Password must match`)
-        } else if (email && password && passwordConfirmation) {
-            person.save()
-            const kuki = req.session.ID = person._id
-            console.log(kuki)
-            res.render(`home`)
         } else if (existAcc) {
             if (existAcc.email === email) {
                 console.log(existAcc)
-                res.send(`Email already exist`)
+                res.render(`userexists`)
             } 
-        }
+        } else if (email === "" && password === "" ) {
+            res.render(`fillup`)
+        } else if (email && password === "") {
+            res.render(`password`)
+        } else if (email === "" && password ) {
+            res.render(`email`)
+        } else if (email && password) {
+            person.save()
+            const kuki = req.session.ID = person._id
+            console.log(kuki)
+            res.redirect(`/home`)
+        } 
+
     })
 
     
