@@ -5,6 +5,9 @@ const mongoose = require(`mongoose`)
 const bodyParser = require(`body-parser`)
 const ejs = require(`ejs`)
 const cookieSession = require(`cookie-session`)
+const bcrypt = require(`bcrypt`)
+
+const saltRounds = 10
 
 const app = express()
 
@@ -57,20 +60,42 @@ app.post(`/`, (req, res) => {
         res.render(`email`)
     }
 
-    user.findOne({email, password}, (err, foundAcc) => {
+    // user.findOne({email, password}, (err, foundAcc) => {
 
+    //     if (err) {
+    //         console.log(err)
+    //     } else if (foundAcc) {
+    //         if (foundAcc.email !== email || foundAcc.password !== password) {
+    //             res.send(`Mali`)
+    //         }  else if (foundAcc.email === email && foundAcc.password === password && foundAcc.isAdmin === true) {
+    //             const kuki = req.session.ID = foundAcc._id
+    //             res.render(`home`)
+    //         } else if (foundAcc.email === email && foundAcc.password === password) {
+    //             const kuki = req.session.ID = foundAcc._id
+    //             res.render(`home`)
+    //         }
+    //     }
+
+    // })
+
+    user.findOne({email}, (err, foundAcc) => {
         if (err) {
             console.log(err)
         } else if (foundAcc) {
-            if (foundAcc.email !== email || foundAcc.password !== password) {
-                res.send(`Mali`)
-            }  else if (foundAcc.email === email && foundAcc.password === password && foundAcc.isAdmin === true) {
-                const kuki = req.session.ID = foundAcc._id
-                res.render(`home`)
-            } else if (foundAcc.email === email && foundAcc.password === password) {
-                const kuki = req.session.ID = foundAcc._id
-                res.render(`home`)
+            if (foundAcc) {
+                bcrypt.compare(password, foundAcc.password, function(err, result) {
+                    if (result === true) {
+                        const kuki = req.session.ID = foundAcc._id
+                        res.render(`home`)
+                    } else if (result === false) {
+                        res.render(`login`)
+                    } else {
+                        res.render(`login`)
+                    }
+                })
             }
+        } else {
+            res.render(`login`)
         }
 
     })
@@ -87,12 +112,12 @@ app.post(`/signup`, (req, res) => {
 
     const { email, password} = req.body
 
+    bcrypt.hash(password, saltRounds, function(err, hash) {
+
     const person = new user ({
         email,
-        password
+        password: hash
     })
-
-    
 
     user.findOne({email, password}, (err, existAcc) => {
 
@@ -113,12 +138,13 @@ app.post(`/signup`, (req, res) => {
             person.save()
             const kuki = req.session.ID = person._id
             console.log(kuki)
+            console.log(hash)
             res.redirect(`/home`)
         } 
 
     })
+    });
 
-    
 })
 
 app.get(`/home`, (req, res) => {
