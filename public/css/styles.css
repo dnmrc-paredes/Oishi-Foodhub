@@ -56,11 +56,16 @@ body {
 .footer {
     display: flex;
     justify-content: center;
-    font-family: var(--read);
+    font-family: var(--small);
     background-color: black;
-    color: white;
+    color: black;
     padding: 0.5rem 0rem;
     margin: auto;
+}
+
+.footer h4 {
+    font-size: 1.3rem;
+    text-align: center;
 }
 
 /* login EJS */
@@ -89,7 +94,6 @@ body {
     font-size: 3rem;
     margin: auto;
     color: black;
-    opacity: 0.8;
 }
 
 .loginform {
@@ -158,6 +162,7 @@ input {
 .regform h1 {
     font-family: var(--small);
     font-weight: normal;
+    text-align: center;
 }
 
 .signupbtn {
@@ -247,3 +252,89 @@ input {
 .contactbox p {
     font-family: var(--read);
 }
+
+@media screen and (max-width: 1000px) {
+    .logindesign h1 {
+        font-size: 4vw;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .logindesign h1 {
+        font-size: 7vw;
+    }
+
+    .loginbox {
+        flex-direction: column;
+    }
+
+    .logindesign {
+        order: 1;
+    }
+
+    .loginform {
+        order: 2;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    .registerbox {
+        padding: 3rem 6rem;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+
+    .registerbox {
+        padding: 4rem 3rem;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+
+    .registerbox {
+        padding: 5rem 2rem;
+    }
+
+    .regform {
+        padding: 3rem 4rem;
+    }
+
+    .contactbox {
+        padding: 8rem 2rem;
+    }
+
+    .logindesign {
+        padding: 7rem 0rem;
+    }
+
+    .logindesign h1 {
+        font-size: 10vw;
+    }
+
+    .formers {
+        padding: 0rem 0rem;
+    }
+    .loginform {
+        padding: 2rem 1rem;
+    }
+
+}
+
+@media screen and (max-width: 450px) {
+
+    .registerbox {
+        padding: 4rem 2rem;
+    }
+
+    .regform {
+        padding: 4rem 2rem;
+    }
+
+}
+
+
