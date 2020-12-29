@@ -7,6 +7,9 @@ const ejs = require(`ejs`)
 const cookieSession = require(`cookie-session`)
 const bcrypt = require(`bcrypt`)
 
+
+
+
 const saltRounds = 10
 
 const app = express()
@@ -148,7 +151,6 @@ app.get(`/home`, (req, res) => {
 
                         res.render(`home`, {product: items})
 
-                
                 }
             }
         })

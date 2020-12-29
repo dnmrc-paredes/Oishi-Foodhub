@@ -1,24 +1,11 @@
-<%- include(`header`) %>
+<%- include(`headerlogin`) %>
 
 <div class="registerbox">
 
     <form action="/signup" method="post" class="regform">
 
         <h1> Fresh foods ready to deliver. </h1>
-
-        <!-- <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="passwordConfirmation" placeholder="Confirm Password"> -->
-
-        <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div> -->
-
-        <div class="msg">
-
-        </div>
-        
+ 
         <div class="form-floating">
             <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email">
             <label for="floatingInput">Email </label>
@@ -27,13 +14,12 @@
             <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
           </div>
-          <!-- <div class="form-floating">
-            <input type="password" name="passwordConfirmation" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Confirm Password</label>
-          </div> -->
-
-        <button type="submit" class="signupbtn"> Sign up </button>
+          
+        <button type="submit" class="signupbtn"> Sign up </button>        
     </form>
+
+
+    
 
 </div>
 
