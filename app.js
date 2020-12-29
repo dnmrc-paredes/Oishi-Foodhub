@@ -43,7 +43,7 @@ app.get(`/`, (req, res) => {
     if (!kuki) {
         res.render(`login`)
     } else {
-        res.render(`home`)
+        res.redirect(`/home`)
     }
 
 })
@@ -60,24 +60,6 @@ app.post(`/`, (req, res) => {
         res.render(`email`)
     }
 
-    // user.findOne({email, password}, (err, foundAcc) => {
-
-    //     if (err) {
-    //         console.log(err)
-    //     } else if (foundAcc) {
-    //         if (foundAcc.email !== email || foundAcc.password !== password) {
-    //             res.send(`Mali`)
-    //         }  else if (foundAcc.email === email && foundAcc.password === password && foundAcc.isAdmin === true) {
-    //             const kuki = req.session.ID = foundAcc._id
-    //             res.render(`home`)
-    //         } else if (foundAcc.email === email && foundAcc.password === password) {
-    //             const kuki = req.session.ID = foundAcc._id
-    //             res.render(`home`)
-    //         }
-    //     }
-
-    // })
-
     user.findOne({email}, (err, foundAcc) => {
         if (err) {
             console.log(err)
@@ -86,7 +68,7 @@ app.post(`/`, (req, res) => {
                 bcrypt.compare(password, foundAcc.password, function(err, result) {
                     if (result === true) {
                         const kuki = req.session.ID = foundAcc._id
-                        res.render(`home`)
+                        res.redirect(`/home`)
                     } else if (result === false) {
                         res.render(`login`)
                     } else {
@@ -155,7 +137,22 @@ app.get(`/home`, (req, res) => {
     if (!kuki) {
         res.render(`login`)
     } else {
-        res.render(`home`)
+
+        product.find({}, (err, items) => {
+            if (err) {
+                console.log(err)
+            } else {
+                if (items) {
+                    
+                    console.log(items)
+
+                        res.render(`home`, {product: items})
+
+                
+                }
+            }
+        })
+
     }
 
 })
