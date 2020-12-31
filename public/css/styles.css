@@ -302,6 +302,52 @@ input {
     font-family: var(--read);
 }
 
+/* productshow EJS */
+
+.showbox {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0rem;
+    margin: 3rem 6rem;
+    justify-content: left;
+}
+
+.showbox h1 {
+    font-family: var(--Logo);
+    margin: 2rem 0rem;
+    font-size: 4rem;
+}
+
+.showbox h3 {
+    font-family: var(--small);
+}
+
+.showbox p {
+    margin: 4rem 0rem;
+    font-size: 1.5rem;
+    font-family: var(--read);
+}
+
+/* cart EJS */
+
+.shoppingbox {
+    display: flex;
+    padding: 14rem 2rem;
+}
+
+.itemname {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.itemprice {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    font-family: var(--small);
+}
+
 @media screen and (max-width: 1000px) {
     .logindesign h1 {
         font-size: 4vw;
@@ -354,6 +400,18 @@ input {
         align-items: center;
         align-content: center;
         align-self: center;
+    }
+
+    .showbox {
+        margin: 1rem 2rem;
+    }
+
+    .showbox h1 {
+        font-size: 10vw;
+    }
+
+    .showbox p {
+        font-size: 5vw;
     }
 
 }

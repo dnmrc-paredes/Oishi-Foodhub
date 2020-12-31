@@ -6,13 +6,15 @@
 
  <% for (let i=0; i<product.length; i++) { %>
 
+    <% const prod = product[i].name %>
+
     <div class="prodbox">
         <div class="item1">
             <img src="https://cdn.pixabay.com/photo/2019/09/22/09/40/pie-4495589__340.png" alt="">
             <p> <%= product[i].name %> </p>  <p> $<%= product[i].price %> </p> 
 
-            <form action="">
-                <button type="submit" class="tryagain2"> Add to cart</button>
+            <form action="/<%=product[i]._id%>"> 
+                <button type="submit" class="tryagain2"> Details </button>
             </form>
         </div>
     </div>

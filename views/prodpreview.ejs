@@ -1,0 +1,16 @@
+<%- include(`header`) %>
+
+<div class="showbox">
+    <h1> <%= aytem.name %> </h1>
+
+    <h3> $<%= aytem.price %> </h3>
+
+    <p> <%= aytem.description %> </p>
+
+    <form action='/cart' method="GET">
+        <input type="hidden" value="<%=aytem._id%>" name="itemid">
+        <button type="submit" class="tryagain"> Add to cart </button>
+    </form>
+</div>
+
+<%- include(`footer`) %>

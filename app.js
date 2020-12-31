@@ -10,6 +10,9 @@ const bcrypt = require(`bcrypt`)
 
 
 
+
+
+
 const saltRounds = 10
 
 const app = express()
@@ -33,11 +36,19 @@ const registerSchema = new mongoose.Schema({
 
 const productsSchema = new mongoose.Schema({
     name: String,
+    price: Number,
+    description: String
+})
+
+const cartSchema = new mongoose.Schema({
+    items: String,
     price: Number
 })
 
 const user = new mongoose.model(`user`, registerSchema)
 const product = new mongoose.model(`product`, productsSchema)
+const cart = new mongoose.model(`cart`, cartSchema)
+
 
 app.get(`/`, (req, res) => {
 
@@ -128,14 +139,13 @@ app.post(`/signup`, (req, res) => {
         } 
 
     })
-    });
+    })
 
 })
 
 app.get(`/home`, (req, res) => {
 
     const kuki = req.session.ID
-    console.log(kuki)
 
     if (!kuki) {
         res.render(`login`)
@@ -147,8 +157,6 @@ app.get(`/home`, (req, res) => {
             } else {
                 if (items) {
                     
-                    console.log(items)
-
                         res.render(`home`, {product: items})
 
                 }
@@ -161,6 +169,14 @@ app.get(`/home`, (req, res) => {
 
 app.get(`/contact`, (req, res) => {
     res.render(`contact`)
+})
+
+app.get(`/logout`, (req, res) => {
+
+    req.session = null
+
+    res.redirect(`/`)
+    
 })
 
 app.get(`/adminpanel`, (req, res) => {
@@ -182,14 +198,81 @@ app.get(`/adminpanel`, (req, res) => {
 
 })
 
-app.get(`/logout`, (req, res) => {
+app.get(`/:prodId`, (req, res) => {
 
-    req.session = null
+    const kuki = req.session.ID
+    const pradakSelected = req.params.prodId
 
-    res.redirect(`/`)
+    // mongoose.Types.ObjectId.isValid(pradakSelected);
+
+    if (!kuki) {
+        res.render(`login`)
+    } else {
+
+        if (pradakSelected.match(/^[0-9a-fA-F]{24}$/)) {
+            product.findById({_id: pradakSelected}, (err, mats) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log(mats)
+                    res.render(`prodpreview`, {aytem: mats})
+                }
+            })
+          }
+          
+    }
 
 })
+
+// app.get(`/:prodId`, (req, res) => {
+
+//     const kuki = req.session.ID 
+//     const _id = req.params.prodId
+
+//     if (!kuki) {
+//         res.render(`login`)
+//     } else {
+//         product.findById({_id}, (err, mats) => {
+//             if (err) {
+//                 console.log(err)
+//             } else {
+//                 // console.log(mats)
+//                 res.render(`prodpreview`, {aytem: mats})  
+//             }
+//         })
+//     }
+    
+// })
+
+// app.post(`/cart`, (req, res) => {
+
+//     const _id = req.body.itemid
+
+//     product.findById({_id}, (err, foundItem) => {
+//         if (err) {
+//             console.log(err)
+//         } else {
+//             if (foundItem) {
+//                 const cart = req.session.cartId = foundItem._id
+//                 const box = req.session.box = ({items: [{ item: cart, quantity: 1 }]})
+//                 if (cart) {
+//                     if (box.items[0].item === cart) {
+//                         box.items[0].quantity++
+//                     }
+//                 } else {
+//                     box.items.push({items: [{ item: cart, quantity: 1 }]})
+//                 }
+
+//                 console.log(box)
+//                 res.render(`cart`, {cartItem: foundItem})
+//             }
+//         }
+//     })
+// })
+
+
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running`)
 })
+
