@@ -1,0 +1,19 @@
+<%- include(`header`) %>
+
+<div class="adminbox">
+
+    <form action="/addproduct" method="post" class="adminprod">
+
+        <h1> Add new product </h1>
+    
+        <input type="text" name="prodname" placeholder="Product name">
+        <input type="text" name="prodprice" placeholder="Price">
+        <input type="text" name="proddesc" placeholder="Description">
+
+        <button type="submit" class="tryagain3"> Submit </button>
+
+    </form>
+
+</div>
+
+<%- include(`footer`) %>

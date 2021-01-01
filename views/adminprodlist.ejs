@@ -1,0 +1,21 @@
+<%- include(`header`) %>
+
+<div class="itemlist">
+
+    <h1> Products List </h1>
+
+   <% for (let i=0; i<lists.length; i++) { %>
+        <div class="aytem1">
+            <div class="pricename"> <h1> <%= lists[i].name %> </h1> </div>
+            <div class="priceprice"> <p> $<%= lists[i].price %> </p> </div>
+            <div class="editdelete"> <form action="/<%= lists[i]._id%>/delete" method="POST"> 
+                <button type="submit" class="tryagain4"> Delete </button>
+            </form></div>
+        </div>
+   <% } %>
+
+
+</div>
+
+<%- include(`footer`) %>
+

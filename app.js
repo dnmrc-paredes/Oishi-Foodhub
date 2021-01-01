@@ -182,14 +182,24 @@ app.get(`/logout`, (req, res) => {
 app.get(`/adminpanel`, (req, res) => {
 
     const kuki = req.session.ID
-    console.log(kuki)
 
     user.findOne({_id: kuki}, (err, foundAcc) => {
         if (err) {
             console.log(err)
         } else if (foundAcc) {
             if (foundAcc.isAdmin === true) {
-                res.render(`admin`)
+
+                product.find({}, (err, data) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log(data)
+
+                        res.render(`adminprodlist`, {lists: data})
+                    }
+                })
+
+                
             } else {
                 res.render(`notadmin`)
             }
@@ -197,6 +207,86 @@ app.get(`/adminpanel`, (req, res) => {
     })
 
 })
+
+app.get(`/addproduct`, (req, res) => {
+
+    const kuki = req.session.ID
+
+    user.findOne({_id: kuki}, (err, foundAcc) => {
+        if (err) {
+            console.log(err)
+        } else if (foundAcc) {
+            if (foundAcc.isAdmin === true) {
+                res.render(`addproduct`)
+            } else {
+                res.render(`notadmin`)
+            }
+        }
+    })
+
+})
+
+app.post(`/addproduct`, (req, res) => {
+
+    const {prodname, prodprice, proddesc} = req.body
+
+    const newPrice = parseInt(prodprice)
+
+    const addProduct = new product({
+        name: prodname,
+        price: newPrice,
+        description: proddesc
+    })
+
+    if (prodname && prodprice && proddesc) {
+        addProduct.save()
+    }
+
+    console.log(`succesfully added`)
+
+    res.redirect(`/addproduct`)
+
+})
+
+app.post(`/:deleteitem/delete`, (req, res) => {
+
+    const item = req.params.deleteitem
+
+    console.log(item)
+    
+    product.findOneAndDelete({_id: item}, (err, foundItem) => {
+        if (err) {
+            console.log(err)
+        } else {
+            if (foundItem) {
+                console.log(`Item Deleted`)
+                res.redirect(`/home`)
+            }
+        } 
+    })
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get(`/:prodId`, (req, res) => {
 

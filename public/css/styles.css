@@ -62,13 +62,13 @@ a {
     font-family: var(--small);
     color: black;
     padding: 1rem 0rem;
-    margin: auto;
     background-color: aquamarine;
 }
 
-.footer h4 {
-    font-size: 1.3rem;
+.footer h5 {
+    font-size: 1rem;
     text-align: center;
+    margin: auto;
 }
 
 /* login EJS */
@@ -80,6 +80,7 @@ a {
 
 .loginbox {
     display: flex;
+    background-color: aquamarine;
 }
 
 .logindesign {
@@ -128,6 +129,10 @@ a {
     margin-top: 0.5rem;
     font-family: var(--small);
     font-size: 0.8rem;
+}
+
+.login p a {
+    color: blue;
 }
 
 input {
@@ -235,16 +240,37 @@ input {
     background-color: rgba(127, 255, 212,0.5);
 }
 
+.tryagain3 {
+    padding: 0.5rem 1rem; 
+    background-color: white;
+    border: none;
+    outline: none;  
+    font-family: var(--small);
+    margin-top: 1rem;
+    border-radius: 5px;
+    transition-property: all;
+    transition-duration: 0.5s;
+}
+
 .tryagain a {
     text-decoration: none;
 }
 
 /* home EJS */
 
+.ultrabox {
+    background-color: aquamarine;
+    padding: 2rem 0rem;
+}
+
+.mainmain {
+    background-color: aquamarine;
+}
+
 .products {
     text-align: center;
     font-family: var(--Logo);
-    margin-top: 3rem;
+    padding-top: 3rem;
 }
 
 .prodbox {
@@ -286,10 +312,120 @@ input {
     margin-top: 1rem;
 }
 
+/* admin EJS */
+
+.adminbox {
+    padding: 10rem 4rem;
+    background-color: aquamarine;
+}
+
+.adminprod {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.adminprod h1 {
+    font-family: var(--Logo);
+    margin: 1rem 0rem;
+}
+
+.adminprod input {
+    background-color: white;
+    width: 100%;
+    margin: 0.3rem auto;
+    font-family: var(--Logo);
+}
+
+.adminbox button {
+    width: 100px;
+    margin: 1rem auto;
+    font-family: var(--small);
+}
+
+/* adminprodlist EJS  */
+
+.itemlist {
+    display: flex;
+    flex-direction: column;
+    padding: 10rem 2rem;
+    background-color: aquamarine;
+}
+
+.itemlist h1 {
+    text-align: center;
+    font-family: var(--small);
+    margin-bottom: 1rem;
+}
+
+.itemlist .aytem1 {
+    display: flex;
+    background-color: burlywood;
+    padding: 0.5rem 0rem;
+    margin: -0.1rem 0rem;
+    background-color: white;
+    border-bottom: solid 2px grey;
+}
+
+.itemlist .aytem1 .pricename {
+    flex: 2;
+    display: flex;
+    justify-content: left;
+    margin: auto;
+    margin-left: 3rem;
+    font-family: var(--Logo);
+}
+
+.itemlist .aytem1 .pricename h1 {
+    margin: auto 2rem; 
+}
+
+.itemlist .aytem1 .priceprice {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-left: 3rem;
+    font-family: var(--read);
+}
+
+.itemlist .aytem1 .priceprice p {
+    margin: auto;
+}
+
+.editdelete {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.editdelete button {
+    margin: auto;
+}
+
+.tryagain4 {
+    display: flex;
+    padding: 0.5rem 1rem; 
+    background-color: aquamarine;
+    border: none;
+    outline: none;  
+    font-family: var(--small);
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    transition-property: all;
+    transition-duration: 0.5s;
+    justify-content: center;
+}
+
+
+
 /* contact EJS */
 
 .contactbox {
     padding: 12rem 5rem;
+    background-color: aquamarine;
 }
 
 .contactbox h2 {
@@ -307,9 +443,9 @@ input {
 .showbox {
     display: flex;
     flex-direction: column;
-    padding: 1rem 0rem;
-    margin: 3rem 6rem;
+    padding: 3rem 6rem;
     justify-content: left;
+    background-color: aquamarine;
 }
 
 .showbox h1 {
@@ -348,6 +484,14 @@ input {
     font-family: var(--small);
 }
 
+@media screen and (max-width: 1400px) {
+
+    .adminprod input {
+        width: 50%;
+    }
+
+}
+
 @media screen and (max-width: 1000px) {
     .logindesign h1 {
         font-size: 4vw;
@@ -381,6 +525,26 @@ input {
         padding: 3rem 6rem;
     }
 
+    .itemlist {
+        padding: 5rem 2rem;
+    }
+
+    .itemlist .aytem1 {
+        justify-content: center;
+        flex-direction: column;
+        margin: 0.5rem 0rem;
+        padding: 2rem 4rem;
+    }
+
+    .itemlist .aytem1 .pricename, .itemlist .aytem1 .priceprice {
+        margin: 1rem auto;
+        text-align: center;
+    }
+
+    
+
+    
+
     
 
     
@@ -403,7 +567,7 @@ input {
     }
 
     .showbox {
-        margin: 1rem 2rem;
+        padding: 2rem;
     }
 
     .showbox h1 {
@@ -412,6 +576,14 @@ input {
 
     .showbox p {
         font-size: 5vw;
+    }
+
+    .adminprod input {
+        width: 100%;
+    }
+
+    .prodbox .item1 {
+        padding: 1rem 3rem;
     }
 
 }
