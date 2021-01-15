@@ -10,6 +10,7 @@ const bcrypt = require(`bcrypt`)
 const loginRouter = require(`./routes/login/loginRouter`)
 const signUpRouter = require(`./routes/signUp/signUpRouter`)
 const homeRouter = require(`./routes/home/homeRoute`)
+const productInfo = require(`./routes/home/productdetails`)
 const contactRouter = require(`./routes/contact/contactRoute`)
 const logoutRouter = require(`./routes/logout/logoutRoute`)
 const adminRouter = require(`./routes/admin/adminPanel/adminRoute`)
@@ -32,11 +33,14 @@ mongoose.connect(`mongodb+srv://TmAdmin:${process.env.PASSWORD}@cluster0.c7khy.m
 app.use(loginRouter)
 app.use(signUpRouter)
 app.use(homeRouter)
+app.use(productInfo)
 app.use(contactRouter)
 app.use(logoutRouter)
 app.use(adminRouter)
 app.use(addProductRouter)
 app.use(deleteProductRouter)
+
+
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running`)
