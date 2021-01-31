@@ -1,0 +1,17 @@
+<%- include(`header`) %>
+
+<div class="cartsu">
+
+   <% for (i=0; i<itemadded.length; i++) { %>
+    
+    <div class="cartsubox">
+        
+        <h1> <%= itemadded[i].name %> </h1>
+
+    </div>
+
+   <% } %>
+
+</div>
+
+<%- include(`footer`) %>

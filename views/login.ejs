@@ -12,6 +12,15 @@
                 
                 <h1> Login </h1>
 
+                <% if (typeof errorBox != `undefined`) { %>
+                    <% errorBox.forEach(function(error) { %>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <%= error.msg %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                    <% }) %>
+                <% } %>
+
                 <div class="form-floating">
                     <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email">
                     <label for="floatingInput">Email address</label>
@@ -23,7 +32,7 @@
 
                 <button type="submit" class="loginbtn"> Login </button>
 
-                <p> No account yet? <a href="/signup"> Sign up now.</a></p> 
+                <p> No account yet? <a href="/register"> Sign up now.</a></p> 
 
             </form>
 

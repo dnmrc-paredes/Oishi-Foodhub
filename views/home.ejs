@@ -1,5 +1,14 @@
 <%- include(`header`) %>
 
+<% if (typeof errorBox != `undefined`) { %>
+    <% errorBox.forEach(function(error) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= error.msg %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+    <% }) %>
+<% } %>
+
 <div class="ultrabox">
 
     <h1 class="products"> Products </h1>
@@ -15,7 +24,7 @@
             <img src="https://cdn.pixabay.com/photo/2019/09/22/09/40/pie-4495589__340.png" alt="">
             <p> <%= product[i].name %> </p>  <p> $<%= product[i].price %> </p> 
 
-            <form action="/<%=product[i]._id%>"> 
+            <form action="/product/<%=product[i]._id%>" method="GET"> 
                 <button type="submit" class="tryagain2"> Details </button>
             </form>
         </div>

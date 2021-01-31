@@ -7,7 +7,7 @@
 
     <p> <%= aytem.description %> </p>
 
-    <form action='/cart' method="POST">
+    <form action='/mycart' method="POST">
         <input type="hidden" value="<%=aytem._id%>" name="itemid">
         <button type="submit" class="tryagain3"> Add to cart </button>
     </form>

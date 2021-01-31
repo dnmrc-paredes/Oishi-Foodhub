@@ -1,12 +1,12 @@
 const express = require(`express`)
 const router = express.Router()
 
-router.get(`/logout`, (req, res) => {
+router.get(`/logout`, async (req, res, next) => {
 
-    req.session = null
+    req.session.ID = null
 
     res.redirect(`/`)
-    
+
 })
 
 module.exports = router

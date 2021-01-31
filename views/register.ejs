@@ -2,9 +2,18 @@
 
 <div class="registerbox">
 
-    <form action="/signup" method="post" class="regform">
+    <form action="/register" method="post" class="regform">
 
         <h1> Fresh foods ready to deliver. </h1>
+
+        <% if (typeof errorBox != `undefined`) { %>
+          <% errorBox.forEach(function(error) { %>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <%= error.msg %>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+          <% }) %>
+      <% } %>
  
         <div class="form-floating">
             <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email">
