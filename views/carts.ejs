@@ -1,16 +1,19 @@
 <%- include(`header`) %>
 
-<div class="cartsu">
+<div class="itemlist">
 
-   <% for (i=0; i<itemadded.length; i++) { %>
-    
-    <div class="cartsubox">
-        
-        <h1> <%= itemadded[i].name %> </h1>
+   <h1> My Cart </h1>
 
-    </div>
+  <% userCart.map(item => { %>
+       <div class="aytem1">
+           <div class="pricename"> <h1> <%= item.name %> </h1> </div>
 
-   <% } %>
+           <div class="editdelete"> <form action="/deleteitemcart/<%=item._id%>" method="POST"> 
+               <button type="submit" class="tryagain4"> Delete </button>
+           </form></div>
+       </div>
+  <% }) %>
+
 
 </div>
 

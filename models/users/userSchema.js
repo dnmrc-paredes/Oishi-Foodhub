@@ -8,39 +8,22 @@ const registerSchema = new mongoose.Schema({
     },
     password: String,
     isAdmin: Boolean,
-    carts: {
-        item: [
+    carts: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: `product`
+                ref: `product`,
             }
         ]
-    }
 })
+
+const autoPopulateLead = function(next) {
+    this.populate('carts');
+    next();
+  };
+  
+registerSchema.pre('findOne', autoPopulateLead)
+.pre('find', autoPopulateLead)
 
 const newPerson = new mongoose.model(`user`, registerSchema)
 
 module.exports = newPerson
-
-// {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: `product`
-        // }
-
-        // carts: {
-        //     item: [{
-        //         item: [
-        //             {
-        //                 type: mongoose.Schema.Types.ObjectId,
-        //                 ref: `product`
-        //             },
-        //             quantity: 
-        //                 {
-        //                     totalItem: {
-        //                         type: Number,
-        //                         default: 1 
-        //                     },
-        //                 }
-        //         ]
-        //     }]
-        // }

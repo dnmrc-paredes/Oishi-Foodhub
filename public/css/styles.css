@@ -349,6 +349,7 @@ input {
 .itemlist {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
     padding: 10rem 2rem;
     background-color: aquamarine;
 }

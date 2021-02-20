@@ -14,6 +14,7 @@ const oneProductRouter = require(`./routes/oneproduct/oneproduct`)
 const adminAddProductRouter = require(`./routes/adminaddproduct/adminaddproduct`)
 const adminPanelRouter = require(`./routes/adminpanel/adminpanel`)
 const adminDeleteProductRouter = require(`./routes/admindeleteproduct/admindeleteproduct`)
+const deleteItemCartRouter =require(`./routes/deleteitemcart/deleteitemcart`)
 
 const usersCartRouter = require(`./routes/mycart/mycart`)
 
@@ -32,7 +33,7 @@ app.use(cookieSession ({
     keys: [`${process.env.KEY}`]
 }))
 
-mongoose.connect(`mongodb+srv://TmAdmin:${process.env.PASSWORD}@cluster0.c7khy.mongodb.net/oishiFH?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+mongoose.connect(`mongodb+srv://TmAdmin:${process.env.PASSWORD}@cluster0.c7khy.mongodb.net/oishiFH?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, 'useFindAndModify': false})
 
 app.use(loginRootRouter)
 app.use(registerRouter)
@@ -41,6 +42,7 @@ app.use(oneProductRouter)
 app.use(adminAddProductRouter)
 app.use(adminPanelRouter)
 app.use(adminDeleteProductRouter)
+app.use(deleteItemCartRouter)
 
 app.use(usersCartRouter)
 
