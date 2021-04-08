@@ -2,18 +2,43 @@
 
 <div class="itemlist">
 
-   <h1> My Cart </h1>
+     <h1> My Cart </h1>
 
-  <% userCart.map(item => { %>
-       <div class="aytem1">
-           <div class="pricename"> <h1> <%= item.name %> </h1> </div>
+          <% userCart.map(item => { %>
+               <% const total = item.qty * item.itemName.price %>
 
-           <div class="editdelete"> <form action="/deleteitemcart/<%=item._id%>" method="POST"> 
-               <button type="submit" class="tryagain4"> Delete </button>
-           </form></div>
-       </div>
-  <% }) %>
+               <div class="cartitemscard" >
+               <div class="cartitemname"> <h1> <%= item.itemName.name %> </h1> </div>
+               <div class="cartitemprice"> <p> <strong> $<%= total %> </strong> </p> </div>
+               <div class="cartitemqty"> <p> Quantity: <strong> <%= item.qty %> </strong> </p> </div>
+               <div class="cartitemcount">
+                    <form action="/minusitem/<%=item._id%>" method="POST" class="minus" >
+                         <button class="taebtns" type="submit"> <strong> - </strong> </button>
+                    </form>
 
+               <p> or </p>
+
+                    <form action="/plusitem/<%=item._id%>" method="POST" class="plus" >
+                         <button class="taebtns" type="submit"> <strong> + </strong> </button>
+                    </form>
+               </div>
+          </div>
+     <% }) %>
+  
+     <div class="totalbar">
+          <% const totalPrice = userCart.map(item => { %>
+          <% return item.qty * item.itemName.price %>
+          <% }) %>
+
+          <% const total = totalPrice.reduce((accumulator, currentValue) => { %>
+               <% return accumulator + currentValue %>
+          <% }, 0) %>
+          
+          <h1> Total: <strong> $<%= total %> </strong> </h1>
+          <form action="/checkout" method="post">
+               <button type="submit"> Checkout </button>
+          </form>
+     </div>
 
 </div>
 

@@ -14,12 +14,16 @@ const oneProductRouter = require(`./routes/oneproduct/oneproduct`)
 const adminAddProductRouter = require(`./routes/adminaddproduct/adminaddproduct`)
 const adminPanelRouter = require(`./routes/adminpanel/adminpanel`)
 const adminDeleteProductRouter = require(`./routes/admindeleteproduct/admindeleteproduct`)
-const deleteItemCartRouter =require(`./routes/deleteitemcart/deleteitemcart`)
-
+const deleteItemCartRouter = require(`./routes/deleteitemcart/deleteitemcart`)
+const ItemCounterRouter = require(`./routes/plusAndMinusItems/plusMinus`)
+const checkoutRouter = require(`./routes/checkout/checkout`)
 const usersCartRouter = require(`./routes/mycart/mycart`)
-
 const contactRouter = require(`./routes/contact/contact`)
 const logoutRouter = require(`./routes/logout/logout`)
+
+// Admin Q's
+const AdminGetAllUser = require(`./routes/getAllUsers/getAllUsers`)
+const AdminGetAllOrders = require(`./routes/getAllOrders/getAllOrders`)
 
 const app = express()
 
@@ -43,12 +47,15 @@ app.use(adminAddProductRouter)
 app.use(adminPanelRouter)
 app.use(adminDeleteProductRouter)
 app.use(deleteItemCartRouter)
-
+app.use(ItemCounterRouter)
+app.use(checkoutRouter)
 app.use(usersCartRouter)
-
 app.use(contactRouter)
 app.use(logoutRouter)
 
+// Admin Q's
+app.use(AdminGetAllUser)
+app.use(AdminGetAllOrders)
 
 app.use((req, res, next) => {
     next(createError(404, `URL not found`))

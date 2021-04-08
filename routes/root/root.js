@@ -16,6 +16,11 @@ router.get(`/`, async (req, res ,next) => {
     } else {
         
         try {
+            const decode = jwt.verify(kuki, process.env.JWT_KEY)
+            const userID = decode.active
+
+            req.session.currentUser = userID
+
             res.redirect(`/products`)
         } catch (err) {
             next(createError(err.status, err))

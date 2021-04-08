@@ -6,6 +6,7 @@ const router = express.Router()
 
 const User = require(`../../models/users/userSchema`)
 const Product = require(`../../models/products/productSchema`)
+const CartItem = require(`../../models/cartItems/cartItem`)
 
 router.post(`/deleteitemcart/:id`, async (req, res, next) => {
 
@@ -22,6 +23,8 @@ router.post(`/deleteitemcart/:id`, async (req, res, next) => {
             }
         })
 
+        const deleteItem = await CartItem.findOneAndRemove({_id: queryToDelete})
+
         res.redirect(`/mycart`)
         
     } catch (err) {
@@ -31,3 +34,17 @@ router.post(`/deleteitemcart/:id`, async (req, res, next) => {
 })
 
 module.exports = router
+
+// if (pwet) {
+//     await CartItem.findOneAndUpdate({_id: pwet._id}, {qty: qty + 1})
+//     console.log(`tae`)
+//     return res.redirect(`/mycart`)
+// } else {
+//     await User.findOneAndUpdate({_id: decode.active}, {
+//         $addToSet: {
+//             carts: currentItem._id
+//         }
+//     })
+//     console.log(`wala`)
+//     return res.redirect(`/mycart`)
+// }

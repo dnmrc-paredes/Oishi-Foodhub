@@ -485,6 +485,95 @@ input {
     font-family: var(--small);
 }
 
+/* carts NEW */
+
+.cartitemscard {
+    background-color: white;
+    margin: -0.1rem 0rem;
+    border-bottom: solid 2px grey;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cartitemname {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.cartitemname h1 {
+    margin: auto;
+}
+
+.cartitemprice {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.cartitemprice p {
+    margin: 1rem auto;
+}
+
+.cartitemqty {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.cartitemqty p {
+    margin: 1rem auto;
+}
+
+.cartitemcount {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.cartitemcount p {
+    margin: 1rem 0.5rem;
+}
+
+.minus {
+    display: flex;
+    align-items: center;
+}
+
+.plus {
+    display: flex;
+    align-items: center;
+}
+
+.taebtns {
+    width: 30px;
+    border: none;
+    outline: none;
+    background-color: aquamarine;
+    border-radius: 5px;
+}
+
+.totalbar h1 {
+    padding-top: 3rem;
+}
+
+.totalbar button {
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-family: var(--small);
+    background-color: white;
+    color: black;
+    padding: 0.5rem 1rem;
+    transition-property: all;
+    transition-duration: 0.2s;
+}
+
+.totalbar button:hover {
+    background-color: rgba(107, 100, 100, 0.9);
+}
+
+
 @media screen and (max-width: 1400px) {
 
     .adminprod input {
@@ -541,14 +630,6 @@ input {
         margin: 1rem auto;
         text-align: center;
     }
-
-    
-
-    
-
-    
-
-    
 
 }
 
