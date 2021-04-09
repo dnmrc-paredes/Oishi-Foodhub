@@ -20,6 +20,7 @@ const checkoutRouter = require(`./routes/checkout/checkout`)
 const usersCartRouter = require(`./routes/mycart/mycart`)
 const contactRouter = require(`./routes/contact/contact`)
 const logoutRouter = require(`./routes/logout/logout`)
+const adminAllOrdersRouter = require(`./routes/adminAllOrders/adminAllOrders`)
 
 // Admin Q's
 const AdminGetAllUser = require(`./routes/getAllUsers/getAllUsers`)
@@ -52,6 +53,7 @@ app.use(checkoutRouter)
 app.use(usersCartRouter)
 app.use(contactRouter)
 app.use(logoutRouter)
+app.use(adminAllOrdersRouter)
 
 // Admin Q's
 app.use(AdminGetAllUser)

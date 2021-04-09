@@ -4,10 +4,19 @@
 
      <h1> My Cart </h1>
 
+     <% if (typeof errorBox != `undefined`) { %>
+          <% errorBox.forEach(function(error) { %>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <%= error.msg %>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+          <% }) %>
+     <% } %>
+
           <% userCart.map(item => { %>
                <% const total = item.qty * item.itemName.price %>
 
-               <div class="cartitemscard" >
+          <div class="cartitemscard" >
                <div class="cartitemname"> <h1> <%= item.itemName.name %> </h1> </div>
                <div class="cartitemprice"> <p> <strong> $<%= total %> </strong> </p> </div>
                <div class="cartitemqty"> <p> Quantity: <strong> <%= item.qty %> </strong> </p> </div>
@@ -23,6 +32,7 @@
                     </form>
                </div>
           </div>
+          
      <% }) %>
   
      <div class="totalbar">
@@ -36,6 +46,7 @@
           
           <h1> Total: <strong> $<%= total %> </strong> </h1>
           <form action="/checkout" method="post">
+               <input type="hidden" name="totalprice" value="<%= total %>" >
                <button type="submit"> Checkout </button>
           </form>
      </div>

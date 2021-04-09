@@ -1,4 +1,5 @@
 const express = require(`express`)
+const jwt = require(`jsonwebtoken`)
 const createError = require(`http-errors`)
 const router = express.Router()
 
@@ -29,37 +30,47 @@ router.post(`/plusitem/:id`, async (req, res, next) => {
 router.post(`/minusitem/:id`, async (req, res, next) => {
 
     const toDecrement = req.params.id
+    const kuki = req.session.ID
 
-    const currentUser = await User.findOne({_id: req.session.currentUser}).populate('carts').populate({
-        path: 'carts',
-        populate: 'itemName',
-    })
+    try {
 
-    const ifZero = currentUser.carts.find(el => el.qty <= 1)
+        const decode = jwt.verify(kuki, process.env.JWT_KEY)
+        const currentUser = await User.findOne({_id: decode.active}).populate('carts').populate({
+            path: 'carts',
+            populate: 'itemName',
+        })
     
-    if (ifZero) {
-
-        await User.findOneAndUpdate({_id: req.session.currentUser}, {
-            $pull: {
-                carts: toDecrement
-            }
-        })
-
-        await CartItem.findOneAndRemove({_id: toDecrement})
-
-        return res.redirect(`/mycart`)
-
-    } else {
-
-        await CartItem.findOneAndUpdate({_id: toDecrement}, {
-            $inc: {
-                qty: -1
-            }
-        })
-
-        return res.redirect(`/mycart`)
-
+        const ifZero = currentUser.carts.find(el => el.qty <= 1 && el.isCheckout === false)
+        
+        if (ifZero) {
+    
+            await User.findOneAndUpdate({_id: decode.active}, {
+                $pull: {
+                    carts: toDecrement
+                }
+            })
+    
+            await CartItem.findOneAndRemove({_id: toDecrement})
+    
+            return res.redirect(`/mycart`)
+    
+        } else {
+    
+            await CartItem.findOneAndUpdate({_id: toDecrement}, {
+                $inc: {
+                    qty: -1
+                }
+            })
+    
+            return res.redirect(`/mycart`)
+    
+        }
+        
+    } catch (err) {
+        next(createError(400, err))
     }
+
+    
 
 })
 

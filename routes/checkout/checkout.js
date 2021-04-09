@@ -1,21 +1,36 @@
 const express = require(`express`)
 const router = express.Router()
+const jwt = require(`jsonwebtoken`)
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 
 // Models
 const User = require(`../../models/users/userSchema`)
 const Order = require(`../../models/orders/orders`)
-const CartItem = require(`../../models/cartItems/cartItem`)
+const CartItem = require(`../../models/cartItems/cartItem`);
 
 router.post(`/checkout`, async (req, res) => {
 
-    const userID = req.session.currentUser
+    const kuki = req.session.ID
+    const ifZeroPrice = +req.body.totalprice
+    const decode = jwt.verify(kuki, process.env.JWT_KEY)
 
-    const currentUser = await User.findOne({_id: userID})
+    const currentUser = await User.findOne({_id: decode.active}).populate('carts').populate({
+        path: 'carts',
+        populate: 'itemName',
+    })
+
+    const userCart = currentUser.carts.filter(item => item.isCheckout === false)
+    
+    let errorBox = []
+
+    if (ifZeroPrice === 0) {
+        errorBox.push({ msg: 'No items in your cart.' })
+        return res.render(`carts`, {errorBox, userCart})
+    }
 
     const newOrder = await new Order({
-        orderBy: userID,
+        orderBy: decode.active,
         orderedItems: currentUser.carts
     })
 
@@ -26,18 +41,14 @@ router.post(`/checkout`, async (req, res) => {
         populate: 'itemName'
     })
 
-    const activateIsCheckout = await User.findOne({_id: userID}).populate('carts').populate({
+    const activateIsCheckout = await User.findOne({_id: decode.active}).populate('carts').populate({
         path: 'carts',
         populate: 'itemName',
     })
 
-    const getNames = currentOrder.orderedItems.map(item => item.itemName.name )
-    const getQties = currentOrder.orderedItems.map(item => item.qty)
-
     const filterNames = currentOrder.orderedItems.filter(item => item.isCheckout === false)
     const filterQties = currentOrder.orderedItems.filter(item => item.isCheckout === false)
     const filterTotal = currentOrder.orderedItems.filter(item => item.isCheckout === false)
-
 
     const getTotal = filterTotal.map(item => {
         return item.itemName.price * item.qty
@@ -49,14 +60,12 @@ router.post(`/checkout`, async (req, res) => {
         return accumulator + currentValue
     }, 0)
 
-    // console.log(orderNames)
-    // console.log(orderQties)
-
     if (orderTotal === 0) {
-        console.log(orderTotal)
+
         return res.redirect(`/mycart`)
+
     } else {
-        console.log(orderTotal)
+
         const doc = new PDFDocument()
 
         doc.pipe(fs.createWriteStream(`receipt.pdf`))

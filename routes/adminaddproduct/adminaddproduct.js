@@ -7,7 +7,7 @@ const router = express.Router()
 const Product = require(`../../models/products/productSchema`)
 const User = require(`../../models/users/userSchema`)
 
-router.get(`/admin/addproduct`, async (req, res ,next) => {
+router.get(`/adminpanel/addproduct`, async (req, res ,next) => {
 
     const kuki = req.session.ID
 
@@ -35,7 +35,7 @@ router.get(`/admin/addproduct`, async (req, res ,next) => {
 
 })
 
-router.post(`/admin/addproduct`, async (req, res, next) => {
+router.post(`/adminpanel/addproduct`, async (req, res, next) => {
 
     const {prodname, prodprice, proddesc} = req.body
 
@@ -62,7 +62,7 @@ router.post(`/admin/addproduct`, async (req, res, next) => {
 
             await toAddProduct.save()
             
-            res.redirect(`/admin/addproduct`)
+            res.redirect(`/adminpanel/addproduct`)
             
         } catch (err) {
 

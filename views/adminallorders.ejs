@@ -1,0 +1,33 @@
+<%- include ('header') %>
+
+<div class="orderboxmain" >
+    
+    <div class="orderbox">
+
+        <h1> All Orders </h1>
+
+        <% allOrders.map(item => { %>
+
+            <div class="ordercard">
+                <% item.orderedItems.map(cartItem => { %>
+                    <p> <strong> <%= cartItem.itemName.name %> </strong> X <strong> <%= cartItem.qty %> </strong> </p>
+                <% }) %>
+
+                <% const prices = item.orderedItems.map(price => { %>
+                    <% return price.itemName.price * price.qty %>
+                <% }) %> %>
+                <% const totalprice = prices.reduce((accumulator, currentValue) => { %>
+                    <% return accumulator + currentValue %>
+                <% }) %>
+
+                <p> Total: <strong> $<%= totalprice %> </strong> </p>
+        
+                <p class="orderby"> Order by: <strong> <%= item.orderBy.email %> </strong> </p>
+            </div>
+    
+        <% }) %>
+    </div>
+
+</div>
+
+<%- include ('footer') %>

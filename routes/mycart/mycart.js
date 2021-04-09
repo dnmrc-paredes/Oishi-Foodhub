@@ -1,6 +1,5 @@
 const express = require(`express`)
 const createError = require(`http-errors`)
-const mongoose = require(`mongoose`)
 const jwt = require(`jsonwebtoken`)
 
 const router = express.Router()
@@ -16,7 +15,7 @@ router.get(`/mycart`, async (req, res, next) => {
     try {
 
         const decode = jwt.verify(kuki, process.env.JWT_KEY)
-        const userID = req.session.currentUser
+        const userID = decode.active
 
         const currentUser = await User.findOne({_id: decode.active}).populate('carts').populate({
             path: 'carts',
@@ -24,9 +23,6 @@ router.get(`/mycart`, async (req, res, next) => {
         })
 
         const userCart = currentUser.carts.filter(item => item.isCheckout === false)
-
-        // req.session.usersCart = []
-        // console.log(req.session.usersCart)
 
         res.render(`carts`, {userCart, userID})
         

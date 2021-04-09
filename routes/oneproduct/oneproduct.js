@@ -21,13 +21,11 @@ router.get(`/product/:id`, async (req, res ,next) => {
                 if (err) {
                     console.log(err)
                 } else if (foundProduct) {
-                    const decoded = await jwt.verify(kuki, process.env.JWT_KEY)
+                    jwt.verify(kuki, process.env.JWT_KEY)
                     res.render(`prodpreview`, {aytem: foundProduct})
                 }
 
             })
-            
-            // res.render(`prodpreview`)
 
         } catch (err) {
             next(createError(err.status, err))

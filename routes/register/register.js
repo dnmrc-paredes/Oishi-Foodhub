@@ -59,7 +59,8 @@ router.post(`/register`,body('email').isEmail().withMessage(`Email must be valid
         }
 
         await newUser.save()
-        const token = await jwt.sign({active: newUser._id}, process.env.JWT_KEY)
+        const token = jwt.sign({active: newUser._id}, process.env.JWT_KEY)
+        req.session.currentUser = newUser._id
         req.session.ID = token
         res.redirect(`/products`)
         

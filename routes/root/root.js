@@ -20,7 +20,6 @@ router.get(`/`, async (req, res ,next) => {
             const userID = decode.active
 
             req.session.currentUser = userID
-
             res.redirect(`/products`)
         } catch (err) {
             next(createError(err.status, err))
