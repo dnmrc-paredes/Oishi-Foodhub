@@ -691,6 +691,12 @@ input {
         padding: 4rem 3rem;
     }
 
+    .cartitemscard {
+        padding: 1rem;
+        flex-direction: column;
+        margin: 0.2rem;
+    }
+
     .mainmain {
         flex-direction: column;
         justify-content: center;
